@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
         Application.targetFrameRate = 60;
         rigid2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        
+
     }
 
     void Update()
@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(key, 1, 1);
         }
         animator.speed = speedx / 2.0f;
+
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("ゴール");
         
     }
 }
