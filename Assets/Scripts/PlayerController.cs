@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && rigid2D.velocity.y == 0)
         {
             rigid2D.AddForce(transform.up * jumpForce);
         }
@@ -40,10 +42,16 @@ public class PlayerController : MonoBehaviour
         }
         animator.speed = speedx / 2.0f;
 
+        if (transform.position.y < -10)
+        {
+            SceneManager.LoadScene("GameScene");
+        }
+
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("ゴール");
+        SceneManager.LoadScene("ClearScene");
         
     }
 }
