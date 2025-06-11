@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && rigid2D.velocity.y == 0)
         {
+            animator.SetTrigger("JumpTrigger");
             rigid2D.AddForce(transform.up * jumpForce);
+
         }
 
         int key = 0;
@@ -40,7 +42,16 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(key, 1, 1);
         }
-        animator.speed = speedx / 2.0f;
+        if (rigid2D.velocity.y == 0)
+        {
+            animator.speed = speedx / 2.0f;
+
+        }
+        else
+        {
+            animator.speed = 1f;
+
+        }
 
         if (transform.position.y < -10)
         {
